@@ -4,6 +4,7 @@ x-backend: &backend
   build:
     context: .
     dockerfile: backend.Dockerfile
+    network: host
   environment:
     DEV_DOCKER: "true"
     DATABASE_URL: postgres://postgres:password@postgres/cargo_registry
@@ -53,6 +54,7 @@ services:
     build:
       context: .
       dockerfile: frontend.Dockerfile
+      network: host
     entrypoint: pnpm start -- --proxy http://backend:8888
     links:
       - backend
